@@ -1,0 +1,13 @@
+#search_box{
+    border: none;
+    box-shadow: none;
+    /* background: url('../images/logo2.png');
+    background: url("http://kodyrabatowe.wp.pl/img/ico/search_gr.png") top left     no-repeat; */
+
+}
+.right-inner-addon i {
+  position: absolute;
+  right: 0px;
+  padding: 10px 12px;
+  pointer-events: none;
+}

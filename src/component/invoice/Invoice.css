@@ -1,0 +1,8 @@
+.container{
+    width: 90%;
+    padding-left: 40px;
+    padding-right: 0;
+}
+body{
+    overflow-x: hidden;
+}
