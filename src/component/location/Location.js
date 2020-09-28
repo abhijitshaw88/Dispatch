@@ -15,7 +15,7 @@ class Location extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div className="container  ml-3" style={{ height: '50vh', width: '50%' }}>
+      <div className="container p-0" style={{ height: '30vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyAhtrtNBSo_cbL9gV4i5xgZopMPqh5Xo5U" }}
           defaultCenter={this.props.center}

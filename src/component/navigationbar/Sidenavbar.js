@@ -53,10 +53,11 @@ class Sidenavbar extends Component {
             Menu
           </Link> */}
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/dashboard">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
               <img src={dashboard} alt="dashboard" style={{width: "20px", height:"30px", fontColor:"white"}}/>
-            </span>{" "}
-            Dashboard
+                {" "}Dashboard
+            </span>
+
           </NavLink>
           {/* <Link className="side-nav_link" to="/project-dailyboard">
             <span>
@@ -77,25 +78,27 @@ class Sidenavbar extends Component {
             User
           </Link> */}
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/viewcustomer">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}} >
             {/* <i class="fas fa-user-circle"></i> */}
             <img src={pdf} alt="pdf" style={{width: "20px", height:"30px", fontColor:"white"}}/>
-            </span>{" "}
-            Customer
+            {" "}
+            Customer</span>
           </NavLink>
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/vieworder">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
             {/* <i class="fas fa-sort"></i> */}
             <img src={truck} alt="truck" style={{width: "20px", height:"30px", fontColor:"white"}}/>
-            </span>{" "}
-            Orders
+            {" "}  Orders
+            </span>
+
           </NavLink>
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/delivery">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
               {/* <i class="fas fa-chart-line"></i> */}
               <img src={delivery} alt="delivery" style={{width: "20px", height:"30px", fontColor:"white"}} />
-            </span>{" "}
-            Delivery
+              {" "}Delivery
+            </span>
+
           </NavLink>
           {/* <Link className="side-nav_link" to="/fleet">
             <span>
@@ -110,46 +113,50 @@ class Sidenavbar extends Component {
            Billing
           </Link> */}
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/account">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
             {/* <i class="fas fa-user-circle"></i> */}
             <img src={account} alt="account" style={{width: "20px", height:"30px", fontColor:"white"}} />
-            </span>{" "}
-            Accounts
+            {" "}Accounts
+            </span>
           </NavLink>
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/map">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
             {/* <i class="fas fa-map-marker" aria-hidden="true"></i> */}
             <img src={pin} alt="search" style={{width: "20px", height:"30px", fontColor:"white"}}/>
-            </span>{" "}
-            Map
+              {" "}Map
+            </span>
+
           </NavLink>
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/reports">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
               {/* <i class="fas fa-chart-line"></i> */}
               <img src={bill} alt='bill' style={{width: "20px", height:"30px", fontColor:"white"}} />
-            </span>{" "}
-            Reports
+              {" "}Reports
+            </span>
           </NavLink>
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/settings">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
               {/* <i class="fas fa-chart-line"></i> */}
               <img src={settings} alt='settings' style={{width: "20px", height:"30px", fontColor:"white"}} />
-            </span>{" "}
-            Settings
+                {" "}Settings
+            </span>
+
           </NavLink>
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/Viewuser">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
               {/* <i class="fas fa-chart-line"></i> */}
               <img src={team} alt="team" style={{width: "20px", height:"30px", fontColor:"white"}} />
-            </span>{" "}
-            Employee
+                {" "}Employee
+              </span>
+
           </NavLink>
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/material-color">
-            <span>
+            <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
               {/* <i class="fas fa-elementor"></i> */}
               <img src={brick} alt='brick' style={{width: "20px", height:"30px", fontColor:"white"}} />
-            </span>{" "}
-            Materials
+                {" "}Materials
+              </span>
+
           </NavLink>
 
           {/* <Link className="side-nav_link" to="/Viewemployee">
@@ -173,11 +180,12 @@ class Sidenavbar extends Component {
         </ul>
         <ul className="align-bottom">
           <NavLink className="main-nav" activeClassName="main-nav-active" to="/organization">
-          <span>
+          <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
 
             <img src={project} alt="project" style={{width: "20px", height:"30px", fontColor:"white"}}/>
-            </span>{" "}
-            Organization
+                    {" "}    Organization
+            </span>
+
           </NavLink>
           {/* <Link className="side-nav_link" to="/">
             <span>

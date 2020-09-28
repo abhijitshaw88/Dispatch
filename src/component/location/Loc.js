@@ -4,7 +4,7 @@ import ConnectApiMaps,{Map} from 'maps-google-react';
 export class Loc extends Component {
   render() {
     return (
-      <div className="container p-5">
+      <div className="container" style={{ height: '30vh', width: '100%'}}>
                 <Map
                 google={this.props.google}
                 mapOptions={{
@@ -28,5 +28,5 @@ export class Loc extends Component {
 }
 
 export default ConnectApiMaps({
-  apiKey: ("AIzaSyAhtrtNBSo_cbL9gV4i5xgZopMPqh5Xo5U"),
+  apiKey: ("AIzaSyAuDlx8ZHGyZE7_ChzGw3UI1XjAaBqpHc4"),
 })(Loc)

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
+import Googlemap from '../location/Location';
+import Google_map from '../Google_map';
 // import "./Addemployee.css";
 
 const AddCustomer = () => {
@@ -29,7 +31,8 @@ const AddCustomer = () => {
       [name]: e.target.value,
     });
   };
-
+  const lon=27
+  const lat=77
   return (
     <div>
         <div className="container mt-5">
@@ -57,9 +60,9 @@ const AddCustomer = () => {
             </div>
           </div>
         </div>
-        <div className="container form-container mt-5">
+        <div className="container form-container mt-5 ">
           <div className="row d-flex justify-content-center m-auto">
-            <div className="col-12 col-md-10 col-lg-12">
+            <div className="col-12 col-md-10 col-lg-12 ">
                   <form className="" >
                     <div className="form-group">
                       <div className="form-row">
@@ -162,7 +165,9 @@ const AddCustomer = () => {
                         </div>
                       </div>
                     </div>
-
+                      <div className="form-group" style={{ height: '30vh', width: '100%' }}>
+                        <Googlemap/>
+                    </div>
                     <div className="form-group signup-button-wrapper">
                        <button
                         className="btn btn-block py-2"
