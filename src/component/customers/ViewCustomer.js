@@ -1,17 +1,64 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import './Customer.css';
+import axios from 'axios';
 
-const ViewCustomer = () => {
-  // console.log(url);
-  const [val, setVal] = useState({
-    companyname:'',
-    email:'',
-    contact:'',
-    sites:''
+
+axios.interceptors.request.use(
+  config => {
+    config.headers.authorization=`Bearer ${localStorage.getItem("tokenKey")}`;
+    return config;
   }
-  );
-  return (
+)
+// const res = await axios.get(`https://aggregate-dispatch.herokuapp.com/api/aggregate/customer`);
+// console.log(res)
+class ViewCustomer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      companyname:'',
+      email:'',
+      contact:'',
+      sites:'',
+      tokenvalue: localStorage.getItem("tokenKey")
+    };
+      this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+        console.log("HEllo")
+        this.handleClick();
+  }
+async handleClick() {
+  try {
+    const response = await axios.get(
+      `https://aggregate-dispatch.herokuapp.com/api/aggregate/customer`,
+      (axios.defaults.headers.common[
+        "x-access-token"
+      ] = this.state.tokenvalue),
+      {
+        params: {
+          aggregate_company_id: '11'
+        },
+        headers: {
+          "content-type": "application/json"
+        }
+      }
+    );
+    this.setState(
+      {
+        companyname: response.data
+      },
+      () => {
+        console.log("helloworld",response);
+      }
+    );
+  } catch (error) {
+    console.log("Error",error);
+  }
+}
+  render(){
+      return (
     <React.Fragment>
       <div className="container mt-5">
         <div className="row">
@@ -21,7 +68,7 @@ const ViewCustomer = () => {
                   to="#"
 
                 >
-                <label id="top"   style={{fontSize:16, color: "black" }}>  Company </label>
+                <label id="top"   style={{fontSize:16, color: "black" }}>  Company</label>
                 </Link>
             </div>
           </div>
@@ -69,6 +116,7 @@ const ViewCustomer = () => {
       </div>
     </React.Fragment>
   );
+  }
 };
 
 export default ViewCustomer;

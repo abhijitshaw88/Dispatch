@@ -3,6 +3,7 @@ import "./User.css";
 import { Link } from "react-router-dom";
 import './AddUser.css';
 
+
 class Adduser extends Component {
   constructor() {
     super();
@@ -13,10 +14,24 @@ class Adduser extends Component {
         { role: 3, View: "", edit: "", add: "" },
         { role: 4, View: "", edit: "", add: "" },
       ],
-      adduservertical: [{ username: "", email: "", role: "", designation: "" }],
+      username: "",
+      email: "",
+      role: "",
+      designation: ""
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(evt) {
+    this.setState({ [evt.target.name]: evt.target.value })
+      console.log( evt.target.name);
+    console.log( this.state.username);
   }
 
+   handleSubmit(event) {
+     event.preventDefault();
+     console.log(this.state);
+   }
   renderTableData() {
     return this.state.adduser.map((adduser, index) => {
       const { role, view, edit, add } = adduser; //destructuring
@@ -69,61 +84,89 @@ class Adduser extends Component {
           </div>
           </div>
         </div>
-          <div className="container ml-auto pt-5 ">
-            <div className="row text-center">
-            <form className="px-5 mx-5 w-100">
+          <div className="container ml-auto pt-3 ">
+            <div className="row pl-3">
+            <form className=" w-100" onSubmit={this.handleSubmit}>
                 <div class="form-group row">
-                <label for="username" class="col-sm-2 col-form-label">Username</label>
+                  <label for="username" class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-10 pl-5">
-                    <input type="text" class="form-control" id="username" placeholder="Username"/>
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      className="form-control"
+                      value={this.state.username}
+                      onChange={this.handleChange}
+                    />
                 </div>
                 </div>
                 <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                <label  class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10 pl-5">
-                  <input type="text" class="form-control" id="Email" value="email@example.com"/>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    className="form-control"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                  />
                 </div>
                 </div>
                 <div class="form-group row">
                 <label for="Role" class="col-sm-2 col-lg-2 col-form-label">Role</label>
                 <div class="col-sm-10 col-lg-10 pl-5">
-                    <input type="text" class="form-control" id="role" placeholder="role"/>
+                    <input
+                    type="text"
+                    name="role"
+                    id="role"
+                    className="form-control"
+                    value={this.state.role}
+                    onChange={this.handleChange}/>
                 </div>
                 </div>
                 <div class="form-group row">
                 <label for="designation" class="col-sm-2 col-form-label">Designation</label>
                 <div class="col-sm-10 pl-5">
-                    <input type="text" class="form-control" id="designation" placeholder="Designation"/>
+                    <input
+                    type="text"
+                    name="designation"
+                    id="designation"
+                    className="form-control"
+                    value={this.state.designation}
+                    onChange={this.handleChange}/>
                 </div>
                 </div>
-                </form>
-            </div>
-            <div className="row pl-5 ml-2">
-                <div className="col-lg-12">
-                <table class="table table-bordered">
-                      <thead>
-                          <tr>
-                            <th scope="col"  style={{ textAlign :"center"}} >Any Extra Role</th>
-                            <th scope="col"  style={{ textAlign :"center"}}>View</th>
-                            <th scope="col"  style={{ textAlign :"center"}}>Edit</th>
-                            <th scope="col"  style={{ textAlign :"center"}}>Add</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="align-text-middle">
-                            <td  style={{ textAlign :"center"}}>Task1</td>
-                            <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
-                            <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
-                            <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
-                        </tr>
-                      </tbody>
-                </table>
+
+                <div className="row">
+                    <div className="col-lg-12">
+                    <table class="table table-bordered">
+                          <thead>
+                              <tr>
+                                <th scope="col"  style={{ textAlign :"center"}} >Any Extra Role</th>
+                                <th scope="col"  style={{ textAlign :"center"}}>View</th>
+                                <th scope="col"  style={{ textAlign :"center"}}>Edit</th>
+                                <th scope="col"  style={{ textAlign :"center"}}>Add</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="align-text-middle">
+                                <td  style={{ textAlign :"center"}}>Task1</td>
+                                <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
+                                <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
+                                <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
+                            </tr>
+                          </tbody>
+                    </table>
+                    </div>
                 </div>
+
+                <div className="row float-right pr-3">
+                  <button type="submit" className="btn btn-secondary float-right">Save</button>
+                </div>
+              </form>
             </div>
-            </div>
-          <div className="row float-right pr-5 mr-5">
-            <button type="button" className="btn btn-secondary float-right">Save</button>
-          </div>
+        </div>
       </div>
     );
   }

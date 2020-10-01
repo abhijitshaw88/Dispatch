@@ -4,35 +4,34 @@ import Googlemap from '../location/Location';
 import Google_map from '../Google_map';
 // import "./Addemployee.css";
 
-const AddCustomer = () => {
-  // state for tracking the form field values
-  const [formValue, setFormValue] = useState({
-    name: "",
-    role: "",
-    taxnumber:"",
-    field:"",
-    coordinator:"",
-    telnum: "",
-  });
+class AddCustomer extends React.Component {
+  constructor(props) {
+   super(props);
+   this.state = {
+     name: "",
+     role: "",
+     taxnumber:"",
+     field:"",
+     coordinator:"",
+     telnum: "",
+     sitename:"",
+     siteadd:""
+   };
 
-  // destructuring state values
-  const {
-    name,
-    role,
-    taxnumber,
-    field,
-    coordinator,
-    telnum,
-  } = formValue;
+   this.handleChange = this.handleChange.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this);
+ }
+ handleChange(evt) {
+   this.setState({ [evt.target.name]: evt.target.value })
+ }
 
-  const handleInputChange = (name) => (e) => {
-    setFormValue({
-      ...formValue,
-      [name]: e.target.value,
-    });
-  };
-  const lon=27
-  const lat=77
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state);
+  }
+
+
+  render(){
   return (
     <div>
         <div className="container mt-5">
@@ -60,10 +59,10 @@ const AddCustomer = () => {
             </div>
           </div>
         </div>
-        <div className="container form-container mt-5 ">
-          <div className="row d-flex justify-content-center m-auto">
-            <div className="col-12 col-md-10 col-lg-12 ">
-                  <form className="" >
+        <div className="container form-container mt-3 ">
+          <div className="row">
+            <div className="col-12 col-md-10 col-lg-12 p-0">
+                  <form className=""  onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <div className="form-row">
                         <div className="col-lg-6">
@@ -73,8 +72,8 @@ const AddCustomer = () => {
                             name="name"
                             id="name"
                             className="form-control"
-                            value={name}
-                            onChange={handleInputChange("name")}
+                            value={this.state.name}
+                            onChange={this.handleChange}
                           />
                         </div>
                         <div className="col-6">
@@ -84,15 +83,15 @@ const AddCustomer = () => {
                               name="role"
                               id="role"
                               className="form-control"
-                              onChange={handleInputChange("role")}
-                              value={role}
+                              value={this.state.role}
+                              onChange={this.handleChange}
                             >
                               <option value="" disabled selected hidden>
                                 Select
                               </option>
-                              <option value="aggregate">Dispatcher</option>
-                              <option value="truck">Quarry Manager</option>
-                              <option value="customer">Sales Department</option>
+                              <option value="Dispatcher">Dispatcher</option>
+                              <option value="Quarry Manager">Quarry Manager</option>
+                              <option value="Sales Department">Sales Department</option>
                             </select>
                           </div>
                         </div>
@@ -103,11 +102,12 @@ const AddCustomer = () => {
                             name="taxnumber"
                             id="taxnumber"
                             className="form-control"
-                            value={taxnumber}
-                            onChange={handleInputChange("taxnumber")}
+                            value={this.state.taxnumber}
+                            onChange={this.handleChange}
+
                           />
                         </div>
-                        <div className="col-6">
+                        <div className="col-lg-6">
                           <div className="form-group">
                             <label>Contact Number</label>
                             <input
@@ -115,8 +115,8 @@ const AddCustomer = () => {
                               name="telnum"
                               id="telnum"
                               className="form-control"
-                              value={telnum}
-                              onChange={handleInputChange("telnum")}
+                              value={this.state.telnum}
+                              onChange={this.handleChange}
                             />
                           </div>
                         </div>
@@ -127,8 +127,9 @@ const AddCustomer = () => {
                             name="field"
                             id="field"
                             className="form-control"
-                            value={field}
-                            onChange={handleInputChange("field")}
+                            value={this.state.field}
+                            onChange={this.handleChange}
+
                           />
                         </div>
                         <div className="col-lg-6">
@@ -138,29 +139,30 @@ const AddCustomer = () => {
                             name="coordinator"
                             id="coordinator"
                             className="form-control"
-                            value={coordinator}
-                            onChange={handleInputChange("coordinator")}
+                            value={this.state.coordinator}
+                            onChange={this.handleChange}
                           />
                         </div>
                         <div className="col-lg-6">
                           <label>Site Name</label>
                           <input
                             type="text"
-                            name="coordinator"
-                            id="coordinator"
+                            name="sitename"
+                            id="sitename"
                             className="form-control"
-                            onChange={handleInputChange("coordinator")}
+                            value={this.state.sitename}
+                            onChange={this.handleChange}
                           />
                         </div>
                         <div className="col-lg-6">
                           <label>Site Address</label>
                           <input
                             type="text"
-                            name="coordinator"
-                            id="coordinator"
+                            name="siteadd"
+                            id="siteadd"
                             className="form-control"
-                            value={coordinator}
-                            onChange={handleInputChange("coordinator")}
+                            value={this.state.add}
+                            onChange={this.handleChange}
                           />
                         </div>
                       </div>
@@ -170,6 +172,7 @@ const AddCustomer = () => {
                     </div>
                     <div className="form-group signup-button-wrapper">
                        <button
+                       type="submit"
                         className="btn btn-block py-2"
                         style={{
                           backgroundColor: "grey",
@@ -177,17 +180,7 @@ const AddCustomer = () => {
                           fontWeight: "bold",
                         }}
                       >
-                     <Link
-                            to="/addcompanysite"
-                            style={{
-                              textDecoration: "none",
-                              color: "#323032",
-                              fontWeight: "bold",
-                            }}
-                          >
-
                             Add Company Site
-                          </Link>
                       </button>
                     </div>
                   </form>
@@ -196,6 +189,7 @@ const AddCustomer = () => {
         </div>
     </div>
   );
+}
 };
 
 export default AddCustomer;
