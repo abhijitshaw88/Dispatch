@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Login.css";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../services/url";
+import { API_URL1,API_URL2 } from "../services/url";
 import authService from "../services/auth-service";
 import SignUp from "../signup/Signup";
 
@@ -25,10 +25,11 @@ class AddLogin extends Component {
   };
 
 
+
   onSubmit = e => {
     e.preventDefault();
     axios
-      .post(`${API_URL}`, this.state)
+      .post(`${API_URL1}`, this.state)
       .then(
         function(response) {
           console.log("hello", response.data.token);

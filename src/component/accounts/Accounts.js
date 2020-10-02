@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import './Accounts.css';
-import SignUp from "../signup/Signup";
+
 const Accounts = () => {
   const [val, setVal] = useState({
     customername:'',
@@ -46,7 +46,7 @@ const Accounts = () => {
                   <td></td>
                   <td><a>Details</a></td>
                 </tr>
-                <tr><SignUp/></tr>
+                <tr></tr>
                 </tbody>
               </table>
           </div>

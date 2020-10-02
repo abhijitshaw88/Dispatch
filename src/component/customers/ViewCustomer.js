@@ -4,12 +4,12 @@ import './Customer.css';
 import axios from 'axios';
 
 
-axios.interceptors.request.use(
-  config => {
-    config.headers.authorization=`Bearer ${localStorage.getItem("tokenKey")}`;
-    return config;
-  }
-)
+// axios.interceptors.request.use(
+//   config => {
+//     config.headers.authorization=`Bearer ${localStorage.getItem("tokenKey")}`;
+//     return config;
+//   }
+// )
 // const res = await axios.get(`https://aggregate-dispatch.herokuapp.com/api/aggregate/customer`);
 // console.log(res)
 class ViewCustomer extends React.Component {
@@ -30,17 +30,16 @@ class ViewCustomer extends React.Component {
         this.handleClick();
   }
 async handleClick() {
+  console.log("handleClick");
   try {
     const response = await axios.get(
-      `https://aggregate-dispatch.herokuapp.com/api/aggregate/customer`,
-      (axios.defaults.headers.common[
-        "x-access-token"
-      ] = this.state.tokenvalue),
+      "https://aggregate-dispatch.herokuapp.com/api/aggregate/customer",
       {
         params: {
           aggregate_company_id: '11'
         },
         headers: {
+           "x_auth_token": `${this.state.tokenvalue}`,
           "content-type": "application/json"
         }
       }

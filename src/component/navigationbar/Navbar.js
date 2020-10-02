@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Navbar.css";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
+import authService from "../services/auth-service";
 
 class Navbar extends Component {
   constructor() {
@@ -28,6 +29,11 @@ class Navbar extends Component {
       document.removeEventListener("click", this.closeMenu);
     });
   }
+  onLogout = e => {
+    e.preventDefault();
+    localStorage.removeItem("tokenKey");
+    window.location.reload(); 
+  };
   render() {
     return (
       <nav  className="navbar navbar-expand-lg nav-color m-0 p-0 top ">
@@ -44,6 +50,13 @@ class Navbar extends Component {
           </Link>
         </ul>*/}
         <div className="dropdown ml-auto">
+        <button
+          type="button"
+          className="btn "
+          onClick={e => this.onLogout(e)}
+        >
+          LOG OUT
+        </button>
           <button
             onClick={this.showMenu}
             className=" btn dropdown-toggle rounded "
