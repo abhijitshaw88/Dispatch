@@ -23,7 +23,11 @@ class AddLogin extends Component {
       [e.target.name]: e.target.value
     });
   };
+  newComp = () => {
+    console.log("Signup called");
+    return <SignUp/>
 
+  }
 
 
   onSubmit = e => {
@@ -103,6 +107,7 @@ class AddLogin extends Component {
                           </button>
                         </div>
                       </form>
+                      
                     </div>
                   </div>
                 </div>

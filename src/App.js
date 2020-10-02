@@ -4,7 +4,7 @@ import Navbar from "./component/navigationbar/Navbar";
 import Navigation from './component/navigationbar/Navigation';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Signin from "./component/login/Login";
-
+import SignUp from './component/signup/Signup';
 import Sidenavbar from "./component/navigationbar/Sidenavbar";
 import Sidebar from "./component/navigationbar/Sidebar";
 import Invoice from "./component/invoice/Invoice";
@@ -93,6 +93,7 @@ class App extends React.Component {
       </div>
     ) : route === "signin" ? (
       <Signin onRouteChange={this.onRouteChange} wait={1} />
+
     ) : (
           window.location.reload()
         )}

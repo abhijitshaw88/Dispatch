@@ -2,20 +2,23 @@ import React, { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
 import Googlemap from '../location/Location';
 import Google_map from '../Google_map';
+import axios from "axios";
 // import "./Addemployee.css";
 
 class AddCustomer extends React.Component {
   constructor(props) {
    super(props);
    this.state = {
+     address_line_1: "",
+     address_line_2: "",
+     city: "",
+     email: "",
      name: "",
-     role: "",
-     taxnumber:"",
-     field:"",
-     coordinator:"",
-     telnum: "",
-     sitename:"",
-     siteadd:""
+     phone_no: "",
+     pincode: "",
+     state: "",
+     password:"",
+     tokenvalue: localStorage.getItem("tokenKey")
    };
 
    this.handleChange = this.handleChange.bind(this);
@@ -25,9 +28,39 @@ class AddCustomer extends React.Component {
    this.setState({ [evt.target.name]: evt.target.value })
  }
 
-  handleSubmit(event) {
+  handleSubmit= async event => {
     event.preventDefault();
-    console.log(this.state);
+    //console.log(this.state);
+    const user = {
+      address_line_1: this.state.address_line_1,
+      address_line_2:  this.state.address_line_1,
+      city: this.state.city,
+      email: this.state.email,
+      name: this.state.name,
+      phone_no: this.state.phone_no,
+      pincode: this.state.pincode,
+      state: this.state.state,
+      password: this.state.password
+   };
+   console.log(user);
+    try {
+      const response =
+        await axios.post(
+        `https://aggregate-dispatch.herokuapp.com/api/aggregate/customer`,
+         user ,
+        {
+          params: {
+            aggregate_company_id: '41'
+          },
+          headers: {
+             "x_auth_token": `${this.state.tokenvalue}`,
+             "content-type": "application/json"
+          }
+        });
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
   }
 
 
@@ -39,7 +72,7 @@ class AddCustomer extends React.Component {
             <div className="text-right">
               <div className="aggregate-button-wrapper">
                   <Link
-                    to="/addcustomer"
+                    to="/viewcustomer"
                     style={{fontSize:16, color: "black" }}
                   >
                 <label id="top"   style={{fontSize:16, color: "black" }}>Company </label>
@@ -78,90 +111,96 @@ class AddCustomer extends React.Component {
                         </div>
                         <div className="col-6">
                           <div className="form-group">
-                            <label>Legal Structure</label>
-                            <select
-                              name="role"
-                              id="role"
+                            <label>Email</label>
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
                               className="form-control"
-                              value={this.state.role}
+                              value={this.state.email}
                               onChange={this.handleChange}
-                            >
-                              <option value="" disabled selected hidden>
-                                Select
-                              </option>
-                              <option value="Dispatcher">Dispatcher</option>
-                              <option value="Quarry Manager">Quarry Manager</option>
-                              <option value="Sales Department">Sales Department</option>
-                            </select>
+                            />
                           </div>
                         </div>
                         <div className="col-lg-6">
-                          <label>Tax number</label>
+                          <label>Contact number</label>
                           <input
                             type="text"
-                            name="taxnumber"
-                            id="taxnumber"
+                            name="phone_no"
+                            id="phone_no"
                             className="form-control"
-                            value={this.state.taxnumber}
+                            value={this.state.phone_no}
                             onChange={this.handleChange}
 
                           />
                         </div>
                         <div className="col-lg-6">
                           <div className="form-group">
-                            <label>Contact Number</label>
+                            <label>Address 1:</label>
                             <input
-                              type="number"
-                              name="telnum"
-                              id="telnum"
+                              type="text"
+                              name="address_line_1"
+                              id="address_line_1"
                               className="form-control"
-                              value={this.state.telnum}
+                              value={this.state.address_line_1}
                               onChange={this.handleChange}
                             />
                           </div>
                         </div>
                         <div className="col-lg-6">
-                          <label>Field ABC</label>
-                          <input
-                            type="text"
-                            name="field"
-                            id="field"
-                            className="form-control"
-                            value={this.state.field}
-                            onChange={this.handleChange}
-
-                          />
+                          <div className="form-group">
+                            <label>Address 2:</label>
+                            <input
+                              type="text"
+                              name="address_line_2"
+                              id="address_line_1"
+                              className="form-control"
+                              value={this.state.address_line_2}
+                              onChange={this.handleChange}
+                            />
+                          </div>
                         </div>
                         <div className="col-lg-6">
-                          <label>Company Coordinator</label>
+                          <label>City</label>
                           <input
                             type="text"
-                            name="coordinator"
-                            id="coordinator"
+                            name="city"
+                            id="city"
                             className="form-control"
-                            value={this.state.coordinator}
-                            onChange={this.handleChange}
-                          />
-                        </div>
-                        <div className="col-lg-6">
-                          <label>Site Name</label>
-                          <input
-                            type="text"
-                            name="sitename"
-                            id="sitename"
-                            className="form-control"
-                            value={this.state.sitename}
+                            value={this.state.city}
                             onChange={this.handleChange}
                           />
                         </div>
                         <div className="col-lg-6">
-                          <label>Site Address</label>
+                          <label>State</label>
                           <input
                             type="text"
-                            name="siteadd"
-                            id="siteadd"
+                            name="state"
+                            id="state"
                             className="form-control"
-                            value={this.state.add}
+                            value={this.state.state}
+                            onChange={this.handleChange}
+                          />
+                        </div>
+                        <div className="col-lg-6">
+                          <label>Pin</label>
+                          <input
+                            type="text"
+                            name="pincode"
+                            id="pincode"
+                            className="form-control"
+                            value={this.state.pincode}
+                            onChange={this.handleChange}
+                          />
+                        </div>
+                        <div className="col-lg-6">
+                          <label>Password</label>
+                          <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            className="form-control"
+                            value={this.state.password}
                             onChange={this.handleChange}
                           />
                         </div>

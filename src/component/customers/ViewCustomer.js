@@ -36,11 +36,11 @@ async handleClick() {
       "https://aggregate-dispatch.herokuapp.com/api/aggregate/customer",
       {
         params: {
-          aggregate_company_id: '11'
+          aggregate_company_id: '41'
         },
         headers: {
            "x_auth_token": `${this.state.tokenvalue}`,
-          "content-type": "application/json"
+           "content-type": "application/json"
         }
       }
     );
@@ -99,17 +99,6 @@ async handleClick() {
                 <th></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>xyz</td>
-                <td>amar@gmail.com</td>
-                <td>7676776767</td>
-                <td></td>
-                <td><a>Add</a></td>
-                <td><a>Edit</a></td>
-                <td><a>Archieve</a></td>
-              </tr>
-            </tbody>
           </table>
         </div>
       </div>
