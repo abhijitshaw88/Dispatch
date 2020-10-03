@@ -106,11 +106,11 @@ class Invoice extends Component {
                   Action <i class="fas fa-caret-down"></i>
                 </Link>
               </form>
-             
+
             </div>
           </div>
         </div>
-        
+
         <div className="row">
           {GenerateInvoice.map((data) => {
             return this.handleInvoice(data);

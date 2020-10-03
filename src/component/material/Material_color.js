@@ -3,8 +3,49 @@ import { Link } from "react-router-dom";
 import AddColor from './AddColor';
 import MaterialImage from './MaterialImage';
 import './Material.css';
+import axios from 'axios';
+import faker from 'faker';
+import Button  from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
-const Material_color = () => {
+class Material_color extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Cdata: [],
+      tokenvalue: localStorage.getItem("tokenKey")
+    };
+  }
+
+  async componentDidMount() {
+        console.log("HEllo")
+        console.log("handleClick");
+        try {
+          const response = await axios.get(
+            "https://aggregate-dispatch.herokuapp.com/api/aggregate/color",
+            {
+              params: {
+                aggregate_company_id: '41'
+              },
+              headers: {
+                 "x_auth_token": `${this.state.tokenvalue}`,
+                 "content-type": "application/json"
+              }
+            }
+          );
+          this.setState(
+            {
+              Cdata: response.data.customers
+            },
+            () => {
+              console.log("helloworld",this.state.Cdata);
+              }
+          );
+        } catch (error) {
+          console.log("Error",error);
+        }
+  }
+  render(){
   return (
     <div>
       <div className="container pl-4">
@@ -32,54 +73,28 @@ const Material_color = () => {
             </div>
           </div>
 
-          <div className="row pt-3">
-            <div className="col-lg-4">
-
-            <MaterialImage/>
-            </div>
-            <div className="col-lg-4">
-
-                  <MaterialImage/>
-            </div>
-            <div className="col-lg-4">
-            <MaterialImage/>
-            </div>
+          <div className="row pt-3">{
+          this.state.Cdata.map((item, key) =>
+          <div className="col-lg-4">
+          <Card>
+            <Card.Img variant="top" src={faker.image.business()}/>
+            <Card.Body>
+            <Card.Text>
+            {item.color_name}
+            </Card.Text>
+            </Card.Body>
+            </Card>
           </div>
-
-          <div className="row pt-3">
-            <div className="col-lg-4">
-
-            <MaterialImage/>
-            </div>
-            <div className="col-lg-4">
-
-                  <MaterialImage/>
-            </div>
-            <div className="col-lg-4">
-            <MaterialImage/>
-            </div>
+          )
+          }
           </div>
-
-          <div className="row pt-3">
-            <div className="col-lg-4">
-
-            <MaterialImage/>
-            </div>
-            <div className="col-lg-4">
-
-                  <MaterialImage/>
-            </div>
-            <div className="col-lg-4">
-            <MaterialImage/>
-            </div>
-          </div>
-
-          <div className="row pt-5 float-right">
-              <AddColor/>
+          <div className="row float-right">
+            <AddColor/>
           </div>
       </div>
     </div>
   );
+}
 };
 
 export default Material_color;

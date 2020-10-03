@@ -2,12 +2,46 @@ import React,{useState  } from "react";
 import { Link } from "react-router-dom";
 import AddSize from './AddSize';
 import './Material.css';
+import axios from 'axios';
 
-const Material_size = () => {
-  const [val, setVal] = useState({
-    materialSize:'',
-    Sizebrief:''
-  });
+class Material_size extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Mdata: [],
+      tokenvalue: localStorage.getItem("tokenKey")
+    };
+  }
+
+  async componentDidMount() {
+        console.log("HEllo")
+        console.log("handleClick");
+        try {
+          const response = await axios.get(
+            "https://aggregate-dispatch.herokuapp.com/api/aggregate/size",
+            {
+              params: {
+                aggregate_company_id: '41'
+              },
+              headers: {
+                 "x_auth_token": `${this.state.tokenvalue}`,
+                 "content-type": "application/json"
+              }
+            }
+          );
+          this.setState(
+            {
+              Mdata: response.data.customers
+            },
+            () => {
+              console.log("helloworld",this.state.Mdata);
+              }
+          );
+        } catch (error) {
+          console.log("Error",error);
+        }
+  }
+  render(){
   return (
     <div>
       <div className="container">
@@ -44,12 +78,15 @@ const Material_size = () => {
                       <th>Size Brief</th>
                     </tr>
                 </thead>
-                <tbody>
-                  <tr >
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tbody>{
+                this.state.Mdata.map((item, key) =>
+                  <tr>
+                    <td>{item.id}</td>
+                    <td>{item.size}</td>
+                    <td>{item.description}</td>
                   </tr>
+                )
+              }
                 </tbody>
               </table>
           </div>
@@ -59,6 +96,7 @@ const Material_size = () => {
       </div>
     </div>
   );
+}
 };
 
 export default Material_size;

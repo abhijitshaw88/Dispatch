@@ -3,14 +3,46 @@ import { Link } from "react-router-dom";
 import AddPrice from "./AddPrice";
 import EditPrice from "./EditPrice";
 import './Material.css';
+import axios from 'axios';
 
-const Material_price = () => {
-  const [val, setVal] = useState({
-    materialColor:'',
-    materialSize:'',
-    materialPrice:''
+class Material_price extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Pdata: [],
+      tokenvalue: localStorage.getItem("tokenKey")
+    };
   }
-  );
+
+  async componentDidMount() {
+        console.log("HEllo")
+        console.log("handleClick");
+        try {
+          const response = await axios.get(
+            "https://aggregate-dispatch.herokuapp.com/api/aggregate/price",
+            {
+              params: {
+                aggregate_company_id: '41'
+              },
+              headers: {
+                 "x_auth_token": `${this.state.tokenvalue}`,
+                 "content-type": "application/json"
+              }
+            }
+          );
+          this.setState(
+            {
+              Pdata: response.data.customers
+            },
+            () => {
+              console.log("helloworld",this.state.Pdata);
+              }
+          );
+        } catch (error) {
+          console.log("Error",error);
+        }
+  }
+  render(){
   return (
     <div>
       <div className="container">
@@ -48,13 +80,16 @@ const Material_price = () => {
                   <th>Price</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr >
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><EditPrice/></td>
-                </tr>
+                <tbody>{
+                this.state.Pdata.map((item, key) =>
+                  <tr>
+                    <td>{item.id}</td>
+                    <td>{item.color}</td>
+                    <td>{item.size}</td>
+                    <td>{item.price}</td>
+                  </tr>
+                )
+              }
                 </tbody>
               </table>
           </div>
@@ -63,7 +98,8 @@ const Material_price = () => {
           </div>
       </div>
     </div>
-  );
+  )
+}
 };
 
 export default Material_price;

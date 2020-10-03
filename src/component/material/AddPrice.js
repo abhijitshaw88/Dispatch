@@ -4,8 +4,14 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button  from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from './Dropdown';
+import axios from 'axios';
+
+
 function AddPrice() {
   const [show, setShow] = useState(false);
+  const [color, setcolor] = useState('');
+  const [price, setprice] = useState('');
+  const [size, setsize] = useState('');
   const [coloropt, setOpnc] = useState(
     [
      { value: "1", label: "Ash" },
@@ -23,7 +29,38 @@ function AddPrice() {
      { value: "8", label: "8" }
    ]
   );
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  }
+  const handleAdd = async event  =>{
+    const data = {
+      color: color,
+      price: price,
+      size: size
+    }
+    try {
+      const response =
+        await axios.post(
+        `https://aggregate-dispatch.herokuapp.com/api/aggregate/addPrice`,
+         data ,
+        {
+          params: {
+            aggregate_company_id: '41'
+          },
+          headers: {
+             "x_auth_token": `${localStorage.getItem("tokenKey")}`,
+             "content-type": "application/json"
+          }
+        });
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
+    console.log(color);
+    console.log(size);
+    console.log(price);
+    setShow(false);
+  }
   const handleShow = () => setShow(true);
 
   return (
@@ -38,22 +75,37 @@ function AddPrice() {
         <Modal.Body>
         <div className="row pl-5">
           <label className="pr-5">Color</label>
-          <Dropdown opt={coloropt}/>
+          <select
+                              onChange={e => setcolor(e.target.value)}
+                              className="browser-default custom-select"
+                                style={{width:"auto"}}>
+                              <option selected value="Ash">Ash</option>
+                              <option value="Caremal">Caremal</option>
+                              <option value="Rose">Rose</option>
+                          </select>
         </div>
         <div className="row pl-5 pt-3">
           <label className="pr-5">Size</label>
-            <Dropdown opt={priceopt}/>
+          <select
+                              onChange={e => setsize(e.target.value)}
+                              className="browser-default custom-select"
+                                style={{width:"auto"}}>
+                              <option selected value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                          </select>
         </div>
         <div className="row pl-5 pt-3">
           <label className="">Price</label>
-          <input type="text" className="pl-5 ml-5"/>
+          <input type="text" className="pl-5 ml-5" onChange={e => setprice(e.target.value)}/>
         </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleAdd}>
             Add
           </Button>
         </Modal.Footer>

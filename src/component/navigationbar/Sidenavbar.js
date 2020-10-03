@@ -134,7 +134,7 @@ class Sidenavbar extends Component {
               {" "}Reports
             </span>
           </NavLink>
-          <NavLink className="main-nav" activeClassName="main-nav-active" to="/settings">
+          <NavLink className="main-nav pt-5" activeClassName="main-nav-active" to="/settings">
             <span style={{width: "20px", height:"30px", fontColor:"white", fontSize:"18px"}}>
               {/* <i class="fas fa-chart-line"></i> */}
               <img src={settings} alt='settings' style={{width: "20px", height:"30px", fontColor:"white"}} />
