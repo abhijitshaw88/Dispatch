@@ -82,7 +82,10 @@ function AddPrice() {
                               <option selected value="Ash">Ash</option>
                               <option value="Caremal">Caremal</option>
                               <option value="Rose">Rose</option>
-                          </select>
+                              <option value="Mahogamy">Mahogamy</option>
+                              <option value="Nusty Nickel">Nusty Nickel</option>
+                              <option value="Painted Desert">Painted Desert</option>
+            </select>
         </div>
         <div className="row pl-5 pt-3">
           <label className="pr-5">Size</label>
@@ -90,10 +93,13 @@ function AddPrice() {
                               onChange={e => setsize(e.target.value)}
                               className="browser-default custom-select"
                                 style={{width:"auto"}}>
-                              <option selected value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
+                                <option selected value="Boulder">Boulder</option>
+                                <option value="Rip Rap">2</option>
+                                <option value="3/4 Screened">3/4 Screened</option>
+                                <option value="1/2 Screened">1/2 Screened</option>
+                                <option value="3/4 Minus">3/4 Minus</option>
+                                <option value="1/2 Minus">1/2 Minus</option>
+                                <option value="1/4 Minus">1/4 Minus</option>
                           </select>
         </div>
         <div className="row pl-5 pt-3">

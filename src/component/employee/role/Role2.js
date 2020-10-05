@@ -1,13 +1,61 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
-import './Role2.css'
-const Role2 = () => {
-  const [val, setVal] = useState({
-    role:'',
-    taskprivilage:''
+import './Role2.css';
+import axios from "axios";
+
+class Role2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      role: "",
+      view:true,
+      edit:true,
+      add:true,
+      tokenvalue: localStorage.getItem("tokenKey")
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  );
+  handleChange(evt) {
+    this.setState({ [evt.target.name]: evt.target.value })
+  }
+  handleInputChange(event) {
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      this.setState({
+        [name]: value
+      });
+  }
+   handleSubmit= async event => {
+     event.preventDefault();
+     //console.log(this.state);
+     const data = {
+       role_name:this.state.role,
+       view_user:this.state.view,
+       edit_user:this.state.edit,
+       add_user:this.state.add
+    };
+    console.log(data);
+     try {
+       const response =
+         await axios.post(
+         `https://aggregate-dispatch.herokuapp.com/api/aggregate/permission`,
+          data ,
+         {
+           headers: {
+              "x_auth_token": `${this.state.tokenvalue}`,
+              "content-type": "application/json"
+           }
+         });
+     } catch (error) {
+       alert(error);
+       console.log(error);
+     }
+   }
   // console.log(url);
+  render(){
   return (
     <React.Fragment>
       {/* <div className="header-wrapper"> */}
@@ -43,16 +91,7 @@ const Role2 = () => {
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            
           </tbody>
         </table>
         </div>
@@ -60,6 +99,7 @@ const Role2 = () => {
       {/* </div> */}
     </React.Fragment>
   );
+}
 };
 
 export default Role2;

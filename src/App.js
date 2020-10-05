@@ -80,8 +80,8 @@ class App extends React.Component {
             <Route path="/fleet" component={Fleet} exact />
             <Route path="/addcompanysite" component={CompanySite} exact />
             <Route path="/delivery" component={Delivery} exact />
-            <Route path="/role1" component={Role1} exact />
-            <Route path="/role2" component={Role2} exact />
+            <Route path="/role1" component={Role2} exact />
+            <Route path="/role2" component={Role1} exact />
             <Route path="/viewuser" component={Viewuser} exact />
             <Route path="/adduser" component={Adduser} exact />
             <Route path="/material-color" component={Material_color} exact />

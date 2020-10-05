@@ -65,6 +65,9 @@ function AddColor() {
                               <option selected value="Ash">Ash</option>
                               <option value="Caremal">Caremal</option>
                               <option value="Rose">Rose</option>
+                              <option value="Mahogamy">Mahogamy</option>
+                              <option value="Nusty Nickel">Nusty Nickel</option>
+                              <option value="Painted Desert">Painted Desert</option>
             </select>
         </div>
         <div className="row pl-5 pt-3">

@@ -1,16 +1,49 @@
 import React,{ useState } from "react";
 import { Link } from "react-router-dom";
-import './AddUser.css'
-const Viewuser = () => {
-  const [val, setVal] = useState({
-    name:'',
-    email:'',
-    contact:'',
-    role:'',
-    designation:''
+import './AddUser.css';
+import axios from "axios";
+
+
+class Viewuser extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      Udata: [],
+      tokenvalue: localStorage.getItem("tokenKey")
+    };
   }
-  );
+
+  async componentDidMount() {
+        console.log("handleClick");
+        try {
+          const response = await axios.get(
+            "https://aggregate-dispatch.herokuapp.com/api/aggregate/member",
+            {
+              params: {
+                aggregate_company_id: '41'
+              },
+              headers: {
+                 "x_auth_token": `${this.state.tokenvalue}`,
+                 "content-type": "application/json"
+              }
+            }
+          );
+          this.setState(
+            {
+              Udata: response.data.members
+            },
+            () => {
+              console.log("helloworld",response);
+              }
+          );
+        } catch (error) {
+          console.log("Error",error);
+        }
+  }
+
   // console.log(url);
+  render(){
   return (
     <React.Fragment>
     <div className="container mt-4">
@@ -42,21 +75,18 @@ const Viewuser = () => {
               <th>Email</th>
               <th>Contact</th>
               <th>Role</th>
-              <th>Designation</th>
-              <th>Edit</th>
-              <th>Archive</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody>{
+          this.state.Udata.map((item, key) =>
             <tr>
-              <td>Amar</td>
-              <td>amar@gmail.com</td>
-              <td>7676776767</td>
-              <td>Dispatcher</td>
-              <td>Dispatcher</td>
-              <td><a>Edit</a></td>
-              <td><a>Archive</a></td>
+              <td>{item.name}</td>
+              <td>{item.email}</td>
+              <td>{item.phone_no}</td>
+              <td>{item.role}</td>
             </tr>
+          )
+          }
           </tbody>
         </table>
         </div>
@@ -65,6 +95,7 @@ const Viewuser = () => {
       {/* </div> */}
     </React.Fragment>
   );
+}
 };
 
 export default Viewuser;

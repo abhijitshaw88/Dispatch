@@ -2,35 +2,58 @@ import React, { Component } from "react";
 import "./User.css";
 import { Link } from "react-router-dom";
 import './AddUser.css';
+import axios from "axios";
 
 
 class Adduser extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      adduser: [
-        { role: 1, View: "", edit: "", add: "" },
-        { role: 2, View: "", edit: "", add: "" },
-        { role: 3, View: "", edit: "", add: "" },
-        { role: 4, View: "", edit: "", add: "" },
-      ],
       username: "",
       email: "",
       role: "",
-      designation: ""
+      designation: "",
+      phone_no:"",
+      password:"",
+      tokenvalue: localStorage.getItem("tokenKey")
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value })
-      console.log( evt.target.name);
-    console.log( this.state.username);
   }
 
-   handleSubmit(event) {
+   handleSubmit= async event => {
      event.preventDefault();
-     console.log(this.state);
+     //console.log(this.state);
+     const user = {
+       aggregate_company_id: 41,
+       name: this.state.username,
+       email:  this.state.email,
+       phone_no: this.state.phone_no,
+       user_role: this.state.role,
+       password: this.state.password
+    };
+    console.log(user);
+     try {
+       const response =
+         await axios.post(
+         `https://aggregate-dispatch.herokuapp.com/api/aggregate/member`,
+          user ,
+         {
+           params: {
+             aggregate_company_id: '41'
+           },
+           headers: {
+              "x_auth_token": `${this.state.tokenvalue}`,
+              "content-type": "application/json"
+           }
+         });
+     } catch (error) {
+       alert(error);
+       console.log(error);
+     }
    }
   renderTableData() {
     return this.state.adduser.map((adduser, index) => {
@@ -114,6 +137,18 @@ class Adduser extends Component {
                 </div>
                 </div>
                 <div class="form-group row">
+                <label for="Role" class="col-sm-2 col-lg-2 col-form-label">Contact</label>
+                <div class="col-sm-10 col-lg-10 pl-5">
+                    <input
+                    type="text"
+                    name="phone_no"
+                    id="phone_no"
+                    className="form-control"
+                    value={this.state.phone_no}
+                    onChange={this.handleChange}/>
+                </div>
+                </div>
+                <div class="form-group row">
                 <label for="Role" class="col-sm-2 col-lg-2 col-form-label">Role</label>
                 <div class="col-sm-10 col-lg-10 pl-5">
                     <input
@@ -126,14 +161,14 @@ class Adduser extends Component {
                 </div>
                 </div>
                 <div class="form-group row">
-                <label for="designation" class="col-sm-2 col-form-label">Designation</label>
-                <div class="col-sm-10 pl-5">
+                <label for="Role" class="col-sm-2 col-lg-2 col-form-label">Password</label>
+                <div class="col-sm-10 col-lg-10 pl-5">
                     <input
-                    type="text"
-                    name="designation"
-                    id="designation"
+                    type="password"
+                    name="password"
+                    id="password"
                     className="form-control"
-                    value={this.state.designation}
+                    value={this.state.password}
                     onChange={this.handleChange}/>
                 </div>
                 </div>
@@ -162,7 +197,7 @@ class Adduser extends Component {
                 </div>
 
                 <div className="row float-right pr-3">
-                  <button type="submit" className="btn btn-secondary float-right">Save</button>
+                  <button type="submit" onCl className="btn btn-secondary float-right">Save</button>
                 </div>
               </form>
             </div>

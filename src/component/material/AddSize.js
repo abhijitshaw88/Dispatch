@@ -63,14 +63,18 @@ function AddSize() {
                               onChange={e => setsize(e.target.value)}
                               className="browser-default custom-select"
                                 style={{width:"auto"}}>
-                              <option selected value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
+                              <option selected value="Boulder">Boulder</option>
+                              <option value="Rip Rap">2</option>
+                              <option value="3/4 Screened">3/4 Screened</option>
+                              <option value="1/2 Screened">1/2 Screened</option>
+                              <option value="3/4 Minus">3/4 Minus</option>
+                              <option value="1/2 Minus">1/2 Minus</option>
+                              <option value="1/4 Minus">1/4 Minus</option>
                           </select>
         </div>
         <div className="row pl-1 pt-3">
           <label className="">Description</label>
-          <input type="text" className="pl-5 ml-5" onChange={e => setdesc(e.target.value)}/>
+          <input type="text" className=" ml-5" onChange={e => setdesc(e.target.value)}/>
         </div>
         </Modal.Body>
         <Modal.Footer>
