@@ -30,12 +30,8 @@ class ViewOrder extends Component{
             <div className="navbar-nav navbar-expand-lg navbar-light">
               <div className="" id="navbarNav">
                 <ul className="navbar-nav">
-                  <li className="nav-item pb-3 ">
-                    <a className="nav-link" id="top" href="#">
-                      <label className="" style={{fontSize:16, color:"black"}}>Order</label>
-                    </a>
-                  </li>
-                  <li className="nav-item pb-3 pl-5 ">
+
+                  <li className="nav-item pb-3  ">
                     <a className="nav-link" id="top" href="#">
                       <label className=" " style={{fontSize:16, color:"black"}}>Ongoing Order</label>
                     </a>

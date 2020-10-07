@@ -2,58 +2,43 @@ import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import './Role2.css';
 import axios from "axios";
+import Editrole from './Editrole';
 
 class Role2 extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {
-      role: "",
-      view:true,
-      edit:true,
-      add:true,
+      Rdata:[],
       tokenvalue: localStorage.getItem("tokenKey")
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(evt) {
-    this.setState({ [evt.target.name]: evt.target.value })
+  async componentDidMount() {
+        console.log("handleClick");
+        try {
+          const response = await axios.get(
+            "https://aggregate-dispatch.herokuapp.com/api/aggregate/permission",
+            {
+              params: {
+                aggregate_company_id: '41'
+              },
+              headers: {
+                 "x_auth_token": `${this.state.tokenvalue}`,
+                 "content-type": "application/json"
+              }
+            }
+          );
+          this.setState(
+            {
+              Rdata: response.data.Permissions
+            },
+            () => {
+              console.log("helloworld",this.state.Rdata);
+              }
+          );
+        } catch (error) {
+          console.log("Error",error);
+        }
   }
-  handleInputChange(event) {
-      const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.name;
-      this.setState({
-        [name]: value
-      });
-  }
-   handleSubmit= async event => {
-     event.preventDefault();
-     //console.log(this.state);
-     const data = {
-       role_name:this.state.role,
-       view_user:this.state.view,
-       edit_user:this.state.edit,
-       add_user:this.state.add
-    };
-    console.log(data);
-     try {
-       const response =
-         await axios.post(
-         `https://aggregate-dispatch.herokuapp.com/api/aggregate/permission`,
-          data ,
-         {
-           headers: {
-              "x_auth_token": `${this.state.tokenvalue}`,
-              "content-type": "application/json"
-           }
-         });
-     } catch (error) {
-       alert(error);
-       console.log(error);
-     }
-   }
   // console.log(url);
   render(){
   return (
@@ -86,12 +71,55 @@ class Role2 extends React.Component {
           <thead>
             <tr>
               <th style={{borderColor: "#2A707D" }}>Role</th>
-              <th>Task Privilage</th>
-              <th>Edit</th>
+              <th className="p-0">Task Privilege
+                <table className="table table-bordered m-0">
+                  <thead>
+                        <tr>
+                          <th className="p-0">  view</th>
+                          <th className="p-0">  Edit</th>
+                          <th className="p-0">  Add</th>
+                        </tr>
+                  </thead>
+                </table>
+              </th>
+              <th style={{borderColor: "#2A707D" }}>Edit Details</th>
             </tr>
           </thead>
-          <tbody>
-            
+          <tbody>{
+          this.state.Rdata.map((item, key) =>
+            <tr>
+              <td>{item.role_name}</td>
+              <td>
+              <table className="table table-borderless m-0">
+                <thead>
+                      <tr>
+                        <th className="p-0">
+                           <input
+                            name="view"
+                            type="checkbox"
+                            checked={item.view_user}
+                            >
+                          </input></th>
+                        <th className="p-0">
+                        <input
+                        type="checkbox"
+                        checked={item.edit_user}
+                        >
+                      </input></th>
+                      <th className="p-0">
+                      <input
+                      type="checkbox"
+                      checked={item.add_user}
+                      >
+                    </input></th>
+                      </tr>
+                </thead>
+                </table>
+              </td>
+                <td><Editrole data={item}/></td>
+            </tr>
+          )
+          }
           </tbody>
         </table>
         </div>
@@ -101,5 +129,6 @@ class Role2 extends React.Component {
   );
 }
 };
+
 
 export default Role2;

@@ -60,44 +60,44 @@ class App extends React.Component {
   return (
     <BrowserRouter>
       {localStorage.getItem("tokenKey") ? (
-      <div>
-      <Navbar />
-        <div className="row">
-          <div className="col-2 m-0 p-0">
-            <Sidenavbar />
-          </div>
-          <div className="col-10 m-0 p-0">
-            <Route path="/dashboard" component={Dashboard} exact/>
-            <Route path="/customer-invoice" component={Invoice} exact />
-            <Route path="/notification" component={Notifications} exact />
-            <Route path="/addcustomer" component={AddCustomer} exact />
-            <Route path="/viewcustomer" component={ViewCustomer} exact />
-            <Route path="/addorder" component={CreateOrder} exact />
-            <Route path="/vieworder" component={ViewOrder} exact />
-            <Route path="/project-dailyboard" component={ProjectDailyBoard} exact />
-            <Route path="/dispatch-dailyboard" component={DispatchDailyBoard} exact />
-            <Route path="/billings" component={Billing} exact />
-            <Route path="/fleet" component={Fleet} exact />
-            <Route path="/addcompanysite" component={CompanySite} exact />
-            <Route path="/delivery" component={Delivery} exact />
-            <Route path="/role1" component={Role2} exact />
-            <Route path="/role2" component={Role1} exact />
-            <Route path="/viewuser" component={Viewuser} exact />
-            <Route path="/adduser" component={Adduser} exact />
-            <Route path="/material-color" component={Material_color} exact />
-            <Route path="/material-size" component={Material_size} exact />
-            <Route path="/material-price" component={Material_price} exact />
-            <Route path="/account" component={Accounts} exact />
+        <div>
+          <Navbar />
+          <div className="row">
+            <div className="col-2 m-0 p-0">
+              <Sidenavbar />
+            </div>
+            <div className="col-10 m-0 p-0">
+              <Route path="/dashboard" component={Dashboard} exact/>
+              <Route path="/customer-invoice" component={Invoice} exact />
+              <Route path="/notification" component={Notifications} exact />
+              <Route path="/addcustomer" component={AddCustomer} exact />
+              <Route path="/viewcustomer" component={ViewCustomer} exact />
+              <Route path="/addorder" component={CreateOrder} exact />
+              <Route path="/vieworder" component={ViewOrder} exact />
+              <Route path="/project-dailyboard" component={ProjectDailyBoard} exact />
+              <Route path="/dispatch-dailyboard" component={DispatchDailyBoard} exact />
+              <Route path="/billings" component={Billing} exact />
+              <Route path="/fleet" component={Fleet} exact />
+              <Route path="/addcompanysite" component={CompanySite} exact />
+              <Route path="/delivery" component={Delivery} exact />
+              <Route path="/role1" component={Role2} exact />
+              <Route path="/role2" component={Role1} exact />
+              <Route path="/viewuser" component={Viewuser} exact />
+              <Route path="/adduser" component={Adduser} exact />
+              <Route path="/material-color" component={Material_color} exact />
+              <Route path="/material-size" component={Material_size} exact />
+              <Route path="/material-price" component={Material_price} exact />
+              <Route path="/account" component={Accounts} exact />
+            </div>
           </div>
         </div>
-      </div>
-    ) : route === "signin" ? (
-      <Signin onRouteChange={this.onRouteChange} wait={1} />
+        ) : route === "signin" ? (
+          <Signin onRouteChange={this.onRouteChange} wait={1} />
 
-    ) : (
-          window.location.reload()
-        )}
-      </BrowserRouter>
+        ) : (
+              window.location.reload()
+            )}
+    </BrowserRouter>
   );
 }
 }

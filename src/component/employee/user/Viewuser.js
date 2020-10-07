@@ -2,7 +2,7 @@ import React,{ useState } from "react";
 import { Link } from "react-router-dom";
 import './AddUser.css';
 import axios from "axios";
-
+import EditUser from './EditUser';
 
 class Viewuser extends React.Component {
 
@@ -18,7 +18,7 @@ class Viewuser extends React.Component {
         console.log("handleClick");
         try {
           const response = await axios.get(
-            "https://aggregate-dispatch.herokuapp.com/api/aggregate/member",
+            "https://aggregate-dispatch.herokuapp.com/api/aggregate/users",
             {
               params: {
                 aggregate_company_id: '41'
@@ -31,7 +31,7 @@ class Viewuser extends React.Component {
           );
           this.setState(
             {
-              Udata: response.data.members
+              Udata: response.data.users
             },
             () => {
               console.log("helloworld",response);
@@ -75,6 +75,7 @@ class Viewuser extends React.Component {
               <th>Email</th>
               <th>Contact</th>
               <th>Role</th>
+              <th>Edit Details</th>
             </tr>
           </thead>
           <tbody>{
@@ -84,6 +85,7 @@ class Viewuser extends React.Component {
               <td>{item.email}</td>
               <td>{item.phone_no}</td>
               <td>{item.role}</td>
+              <td><EditUser data={item}/></td>
             </tr>
           )
           }

@@ -15,15 +15,26 @@ class Adduser extends Component {
       designation: "",
       phone_no:"",
       password:"",
+      view:true,
+      edit:true,
+      add:true,
       tokenvalue: localStorage.getItem("tokenKey")
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value })
   }
-
+  handleInputChange(event) {
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      this.setState({
+        [name]: value
+      });
+  }
    handleSubmit= async event => {
      event.preventDefault();
      //console.log(this.state);
@@ -33,13 +44,16 @@ class Adduser extends Component {
        email:  this.state.email,
        phone_no: this.state.phone_no,
        user_role: this.state.role,
-       password: this.state.password
+       password: this.state.password,
+       view_user:this.state.view,
+       edit_user:this.state.edit,
+       add_user:this.state.add
     };
     console.log(user);
      try {
        const response =
          await axios.post(
-         `https://aggregate-dispatch.herokuapp.com/api/aggregate/member`,
+         `https://aggregate-dispatch.herokuapp.com/api/aggregate/addUser`,
           user ,
          {
            params: {
@@ -55,34 +69,7 @@ class Adduser extends Component {
        console.log(error);
      }
    }
-  renderTableData() {
-    return this.state.adduser.map((adduser, index) => {
-      const { role, view, edit, add } = adduser; //destructuring
-      return (
-        <tr>
-          <td>{role}</td>
-          <td>{view}</td>
-          <td>{edit}</td>
-          <td>{add}</td>
-        </tr>
-      );
-    });
-  }
-
-  renderVerticalTableData() {
-    return this.state.adduservertical.map((adduservertical, index) => {
-      const { username, email, role, designation } = adduservertical; //destructuring
-      return (
-        <tr>
-          <td>{username}</td>
-          <td>{email}</td>
-          <td>{role}</td>
-          <td>{designation}</td>
-        </tr>
-      );
-    });
-  }
-
+  
   render() {
     return (
       <div>
@@ -187,9 +174,33 @@ class Adduser extends Component {
                           <tbody>
                             <tr className="align-text-middle">
                                 <td  style={{ textAlign :"center"}}>Task1</td>
-                                <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
-                                <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
-                                <td className="pl-4" style={{ textAlign :"center"}}><input type="checkbox" className="form-check-input" id="exampleCheck1"/></td>
+                                <td className="pl-4" style={{ textAlign :"center"}}>
+                                  <input
+                                    name="view"
+                                    type="checkbox"
+                                    checked={this.state.view}
+                                    onChange={this.handleInputChange}
+                                    >
+                                  </input>
+                                </td>
+                                <td className="pl-4" style={{ textAlign :"center"}}>
+                                  <input
+                                    name="edit"
+                                    type="checkbox"
+                                    checked={this.state.edit}
+                                    onChange={this.handleInputChange}
+                                    >
+                                  </input>
+                                </td>
+                                <td className="pl-4" style={{ textAlign :"center"}}>
+                                  <input
+                                    name="add"
+                                    type="checkbox"
+                                    checked={this.state.add}
+                                    onChange={this.handleInputChange}
+                                    >
+                                  </input>
+                                </td>
                             </tr>
                           </tbody>
                     </table>
@@ -199,7 +210,7 @@ class Adduser extends Component {
                 <div className="row float-right pr-3">
                   <button type="submit" onCl className="btn btn-secondary float-right">Save</button>
                 </div>
-              </form>
+            </form>
             </div>
         </div>
       </div>
