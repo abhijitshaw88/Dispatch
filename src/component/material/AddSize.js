@@ -46,6 +46,7 @@ function AddSize() {
     console.log(size);
     console.log(desc);
     setShow(false);
+     window.location.reload();
   }
   return (
     <>

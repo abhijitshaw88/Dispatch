@@ -35,39 +35,37 @@ function Editrole(props) {
   }
   const handleShow = () => setShow(true);
   const handleAdd = async event  =>{
+     event.preventDefault();
     console.log("hello I am handleAdd");
     const data = {
-      user_role: role,
+      role_name: role,
       view_user:view,
       edit_user:edit,
       add_user:add
    };
    console.log(data);
-    const  handleSubmit= async event => {
-       event.preventDefault();
-       const user = {
-      };
-      console.log("hello");
        try {
          const response =
-           await axios.post(
-           `https://aggregate-dispatch.herokuapp.com/api/aggregate/addUser`,
-            user ,
+           await axios.put(
+           `https://aggregate-dispatch.herokuapp.com/api/aggregate/editRole`,
+            data,
            {
              params: {
-               aggregate_company_id: '41'
+               role_id: props.data.id
              },
              headers: {
-                "x_auth_token": `${this.state.tokenvalue}`,
+                "x_auth_token": `${localStorage.getItem("tokenKey")}`,
                 "content-type": "application/json"
              }
-           });}
+           });
+         }
        catch (error) {
          alert(error);
          console.log(error);
        }
-     }
      setShow(false);
+      window.location.reload();
+
   }
   return (
     <>

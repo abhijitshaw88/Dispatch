@@ -4,13 +4,19 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button  from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
-function EditUser(props) {
+function EditCust(props) {
+
   console.log("Grab data",props.data);
   const [show, setShow] = useState(false);
-  const [username, setusername] = useState(props.data.name);
+  const [name, setname] = useState(props.data.name);
   const [email, setemail] = useState(props.data.email);
+  const [pass, setpass] = useState(props.data.password);
   const [contact, setcontact] = useState(props.data.phone_no);
-  const [role, setrole] = useState(props.data.role);
+  const [add1, setadd1] = useState(props.data.address_line_1);
+  const [add2, setadd2] = useState(props.data.address_line_2);
+  const [city, setcity] = useState(props.data.city);
+  const [pin, setpin] = useState(props.data.pin);
+  const [state, setstate] = useState(props.data.state);
   const handleClose = () => {
     setShow(false);
   }
@@ -19,39 +25,37 @@ function EditUser(props) {
   const handleAdd = async event  =>{
     event.preventDefault();
        const user = {
-         name: username,
-         email:  email,
-         phone_no: contact,
-         role: role,
-         password:12345,
-         add_user:props.data.add_user,
-         view_user:props.data.view_user,
-         edit_user:props.data.edit_user
-
+         name:name,
+         email: email,
+         password:pass,
+         phone_no:contact,
+         address_line_1: add1,
+         address_line_2: add2,
+         city:city,
+         pincode:pin,
+         state:state
       };
-      const id=props.data.id;
        console.log("I am handleAdd",user);
        try {
          const response =
            await axios.put(
-           `https://aggregate-dispatch.herokuapp.com/api/aggregate/editUser`,
+           `https://aggregate-dispatch.herokuapp.com/api/aggregate/editCustomer`,
             user,
            {
              params:{
-              user_id: props.data.id
+              customer_id: props.data.customer_id
             },
              headers: {
                 "x_auth_token": `${localStorage.getItem("tokenKey")}`,
                 "content-type": "application/json"
              }
            });
-            console.log("Res",response);
          }
        catch (error) {
          console.log(error);
        }
+       window.location.reload();
      setShow(false);
-      window.location.reload();
   }
   return (
     <>
@@ -72,8 +76,8 @@ function EditUser(props) {
                       name="username"
                       id="username"
                       className="form-control"
-                      value={username}
-                      onChange={e => setusername(e.target.value)}
+                      value={name}
+                      onChange={e => setname(e.target.value)}
                     />
                 </div>
             </div>
@@ -111,8 +115,8 @@ function EditUser(props) {
                     name="role"
                     id="role"
                     className="form-control"
-                    value={role}
-                    onChange={e => setrole(e.target.value)}
+                    value={state}
+                    onChange={e => setstate(e.target.value)}
                     />
                 </div>
             </div>
@@ -126,4 +130,4 @@ function EditUser(props) {
   );
 }
 
- export default EditUser;
+ export default EditCust;

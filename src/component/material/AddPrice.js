@@ -60,6 +60,7 @@ function AddPrice() {
     console.log(size);
     console.log(price);
     setShow(false);
+     window.location.reload();
   }
   const handleShow = () => setShow(true);
 

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import './Customer.css';
 import axios from 'axios';
 import Table from './Table';
+import EditCust from './EditCust';
 
 class ViewCustomer extends React.Component {
 
@@ -81,6 +82,7 @@ class ViewCustomer extends React.Component {
                 <th>Email</th>
                 <th>Contact</th>
                 <th>State</th>
+                <th>Edit Details</th>
               </tr>
             </thead>
             <tbody>{
@@ -90,6 +92,7 @@ class ViewCustomer extends React.Component {
                 <td>{item.email}</td>
                 <td>{item.phone_no}</td>
                 <td>{item.state}</td>
+                <td><EditCust data={item}/></td>
               </tr>
             )
           }

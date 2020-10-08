@@ -9,7 +9,6 @@ function AddColor() {
   const [color, setcolor] = useState('');
   const [image, setimage] = useState('');
   const handleClose = () => {
-
     setShow(false);
   }
   const handleShow = () => setShow(true);
@@ -45,6 +44,7 @@ function AddColor() {
     console.log(color);
     console.log(formData);
     setShow(false);
+    window.location.reload();
   }
   return (
     <>
