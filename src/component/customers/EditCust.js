@@ -59,7 +59,7 @@ function EditCust(props) {
   }
   return (
     <>
-      <Button style={{backgroundColor:"grey"}} onClick={handleShow}>
+      <Button style={{backgroundColor:" #2A707D"}} onClick={handleShow}>
         Edit
       </Button>
       <Modal show={show} onHide={handleClose} animation={false}  aria-labelledby="contained-modal-title-vcenter">

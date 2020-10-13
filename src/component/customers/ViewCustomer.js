@@ -4,6 +4,8 @@ import './Customer.css';
 import axios from 'axios';
 import Table from './Table';
 import EditCust from './EditCust';
+import ViewSite from './ViewSites';
+import AddSite from './AddSite';
 
 class ViewCustomer extends React.Component {
 
@@ -55,7 +57,7 @@ class ViewCustomer extends React.Component {
                   to="#"
 
                 >
-                <label id="top"   style={{fontSize:16, color: "black" }}>  Company</label>
+                <label id="top"   style={{fontSize:16, color: "black" }}>  Customer</label>
                 </Link>
             </div>
           </div>
@@ -65,7 +67,7 @@ class ViewCustomer extends React.Component {
                   to="/addcustomer"
                     style={{fontSize:16, color: "black" }}
                 >
-                  <label id="top"   style={{fontSize:16, color: "black" }}>Add  Company </label>
+                  <label id="top"   style={{fontSize:16, color: "black" }}>Add  Customer </label>
                 </Link>
             </div>
           </div>
@@ -74,25 +76,26 @@ class ViewCustomer extends React.Component {
       <div className="container ml-auto">
         <div className="row text-center pt-3">
           <table
-            className="table table-bordered"
-          >
-            <thead>
+            className="table table-hover shadow-lg p-1 mb-3 bg-white rounded ">
+            <thead className="thead-dark">
               <tr>
                 <th>Company name</th>
                 <th>Email</th>
                 <th>Contact</th>
-                <th>State</th>
-                <th>Edit Details</th>
+                <th>Sites</th>
+                <th>Edit</th>
+                <th>Add</th>
               </tr>
             </thead>
             <tbody>{
             this.state.Cdata.map((item, key) =>
-              <tr>
+              <tr className="font-weight-bold">
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.phone_no}</td>
-                <td>{item.state}</td>
+                <td><ViewSite data={item}/></td>
                 <td><EditCust data={item}/></td>
+                <td><AddSite data={item}/></td>
               </tr>
             )
           }

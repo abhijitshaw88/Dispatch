@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./Login.css";
+import { BrowserRouter, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { API_URL1,API_URL2 } from "../services/url";
 import authService from "../services/auth-service";
 import SignUp from "../signup/Signup";
-
+import { Link } from 'react-router-dom';
 class AddLogin extends Component {
   constructor(props) {
     super(props);
@@ -23,13 +24,6 @@ class AddLogin extends Component {
       [e.target.name]: e.target.value
     });
   };
-  newComp = () => {
-    console.log("Signup called");
-    return <SignUp/>
-
-  }
-
-
   onSubmit = e => {
     e.preventDefault();
     axios
@@ -38,7 +32,6 @@ class AddLogin extends Component {
         function(response) {
           console.log("hello", response.data.token);
           console.log("login", response.data.message);
-            console.log("Working");
           if (response.data.message !== "Wrong password") {
             localStorage.setItem("tokenKey", response.data.token);
             console.log(localStorage.getItem("tokenKey"));
@@ -106,8 +99,10 @@ class AddLogin extends Component {
                             Login
                           </button>
                         </div>
+                        <div class="form-group no-margin">
+                          <Link to="/register">Create an account</Link>
+                        </div>
                       </form>
-                      
                     </div>
                   </div>
                 </div>

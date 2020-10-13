@@ -8,6 +8,7 @@ class Role1 extends React.Component {
     super(props);
     this.state = {
       role: "",
+      task_name:"",
       view:true,
       edit:true,
       add:true,
@@ -82,7 +83,7 @@ class Role1 extends React.Component {
           <form className=""  onSubmit={this.handleSubmit}>
                 <div className="row pt-3 pl-2">
                         <div className="col-lg-1 p-0 pt-1">
-                          <label className="p-0 text-black "  style={{fontSize:16, color: "black" }}>Role name</label>
+                          <label className="p-0 text-black "  style={{fontSize:16, color: "black" }}>Role</label>
                         </div>
                         <div className="col-lg-11  input-group-sm">
                             <input
@@ -97,6 +98,7 @@ class Role1 extends React.Component {
                             <table class="table table-bordered">
                                   <thead>
                                       <tr>
+                                        <th scope="col"  style={{ textAlign :"center"}}>Task Name</th>
                                         <th scope="col"  style={{ textAlign :"center"}}>View</th>
                                         <th scope="col"  style={{ textAlign :"center"}}>Edit</th>
                                         <th scope="col"  style={{ textAlign :"center"}}>Add</th>
@@ -104,6 +106,15 @@ class Role1 extends React.Component {
                                   </thead>
                                   <tbody>
                                     <tr className="align-text-middle">
+                                        <td>
+                                          <input
+                                          type="text"
+                                          name="task_name"
+                                          id="task_name"
+                                          className="form-control"
+                                          value={this.state.task_name}
+                                          onChange={this.handleChange}/>
+                                        </td>
                                         <td className="pl-4" style={{ textAlign :"center"}}>
                                           <input
                                             name="view"

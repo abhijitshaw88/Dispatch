@@ -39,7 +39,7 @@ class Signup extends Component {
   render() {
     return (
       <div>
-        <div class="my-login-page">
+        <div class="my-Signup-page">
           <section class="h-100">
             <div class="container h-100">
               <div class="row justify-content-md-center h-100">

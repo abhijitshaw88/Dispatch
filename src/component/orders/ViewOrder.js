@@ -1,22 +1,40 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Axios from 'axios';
+import axios from 'axios';
 import './Order.css';
 
 class ViewOrder extends Component{
   constructor(){
     super()
     this.state={
-      fields: []
+      Odata: []
     }
   }
 
-  componentDidMount() {
-    let fields = this.state.fields;
-    Axios.get("https://api/aggregate/order").then((res) => {
-      this.setState({ fields: res.data, loading: false });
-      console.log({ fields: res.data });
-    })
+  async componentDidMount() {
+        console.log("HEllo")
+        console.log("handleClick");
+        try {
+          const response = await axios.get(
+            "https://aggregate-dispatch.herokuapp.com/api/aggregate/customer",
+            {
+              headers: {
+                 "x_auth_token": `${this.state.tokenvalue}`,
+                 "content-type": "application/json"
+              }
+            }
+          );
+          this.setState(
+            {
+              Cdata: response.data.customers
+            },
+            () => {
+              console.log("helloworld",this.state.Cdata[0]);
+              }
+          );
+        } catch (error) {
+          console.log("Error",error);
+        }
   }
 
   render(){
@@ -31,7 +49,12 @@ class ViewOrder extends Component{
               <div className="" id="navbarNav">
                 <ul className="navbar-nav">
 
-                  <li className="nav-item pb-3  ">
+                    <li className="nav-item pb-3  ">
+                        <a className="nav-link" id="top" href="#">
+                        <label className=" " style={{fontSize:16, color:"black"}}>Order Request</label>
+                        </a>
+                    </li>
+                  <li className="nav-item pb-3  pl-5">
                     <a className="nav-link" id="top" href="#">
                       <label className=" " style={{fontSize:16, color:"black"}}>Ongoing Order</label>
                     </a>
@@ -48,8 +71,8 @@ class ViewOrder extends Component{
         </div>
 
           <div className="row text-center">
-            <table className="table table-bordered table-striped">
-              <thead>
+            <table   className="table table-hover shadow-lg p-1 mb-3 bg-white rounded ">
+              <thead className="thead-dark">
                 <tr>
                   <th>S. No.</th>
                   <th>Customer Name</th>
@@ -61,19 +84,6 @@ class ViewOrder extends Component{
 
                 </tr>
               </thead>
-              <tbody>
-              {this.state.fields.map((fields)=>
-                      <tr key={fields.id}>
-                        <td>{fields.Sno}</td>
-                        <td>{fields.name}</td>
-                        <td>{fields.site}</td>
-                        <td>{fields.qty}</td>
-                        <td>{fields.time}</td>
-                        <td>{fields.summary}</td>
-                        <td>{fields.status}</td>
-                      </tr>
-                    )}
-              </tbody>
             </table>
           </div>
         </div>

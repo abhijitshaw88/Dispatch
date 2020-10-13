@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./component/navigationbar/Navbar";
+import Auth from "./component/auth/Auth";
 import Navigation from './component/navigationbar/Navigation';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Signin from "./component/login/Login";
@@ -57,8 +58,10 @@ class App extends React.Component {
 
   render() {
     const { route } = this.state;
+    console.log(route);
   return (
     <BrowserRouter>
+      <Route path="/register" component={SignUp} />
       {localStorage.getItem("tokenKey") ? (
         <div>
           <Navbar />
@@ -95,7 +98,7 @@ class App extends React.Component {
           <Signin onRouteChange={this.onRouteChange} wait={1} />
 
         ) : (
-              window.location.reload()
+          <SignUp />
             )}
     </BrowserRouter>
   );

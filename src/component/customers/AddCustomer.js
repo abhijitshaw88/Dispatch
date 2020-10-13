@@ -75,7 +75,7 @@ class AddCustomer extends React.Component {
                     to="/viewcustomer"
                     style={{fontSize:16, color: "black" }}
                   >
-                <label id="top"   style={{fontSize:16, color: "black" }}>Company </label>
+                <label id="top"   style={{fontSize:16, color: "black" }}>Customer </label>
                   </Link>
 
               </div>
@@ -86,7 +86,7 @@ class AddCustomer extends React.Component {
                     to="/addcustomer"
                       style={{fontSize:16, color: "black" }}
                   >
-                  <label id="top"   style={{fontSize:16, color: "black" }}>Add  Company </label>
+                  <label id="top"   style={{fontSize:16, color: "black" }}>Add  Customer </label>
                   </Link>
               </div>
             </div>
@@ -95,14 +95,17 @@ class AddCustomer extends React.Component {
         <div className="container form-container mt-3 ">
           <div className="row">
             <div className="col-12 col-md-10 col-lg-12 p-0">
+              <div class="card shadow-lg p-1 mb-3 bg-white rounded">
+                <div class="card-body">
                   <form className=""  onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <div className="form-row">
                         <div className="col-lg-6">
-                          <label>Company Name</label>
+                          {/* <label>Company name</label>*/}
                           <input
                             type="text"
                             name="name"
+                            placeholder="company name"
                             id="name"
                             className="form-control"
                             value={this.state.name}
@@ -111,10 +114,11 @@ class AddCustomer extends React.Component {
                         </div>
                         <div className="col-6">
                           <div className="form-group">
-                            <label>Email</label>
+                            {/* <label>Email</label>*/}
                             <input
                               type="text"
                               name="email"
+                                placeholder="email"
                               id="email"
                               className="form-control"
                               value={this.state.email}
@@ -123,10 +127,11 @@ class AddCustomer extends React.Component {
                           </div>
                         </div>
                         <div className="col-lg-6">
-                          <label>Contact number</label>
+                        {/*   <label>Contact number</label>*/}
                           <input
                             type="text"
                             name="phone_no"
+                            placeholder="Contact"
                             id="phone_no"
                             className="form-control"
                             value={this.state.phone_no}
@@ -136,10 +141,11 @@ class AddCustomer extends React.Component {
                         </div>
                         <div className="col-lg-6">
                           <div className="form-group">
-                            <label>Address 1:</label>
+                            {/*<label>Address 1:</label>*/}
                             <input
                               type="text"
                               name="address_line_1"
+                                placeholder="Address"
                               id="address_line_1"
                               className="form-control"
                               value={this.state.address_line_1}
@@ -149,9 +155,10 @@ class AddCustomer extends React.Component {
                         </div>
                         <div className="col-lg-6">
                           <div className="form-group">
-                            <label>Address 2:</label>
+                          {/*   <label>Address 2:</label>*/}
                             <input
                               type="text"
+                                placeholder="Address"
                               name="address_line_2"
                               id="address_line_1"
                               className="form-control"
@@ -161,9 +168,10 @@ class AddCustomer extends React.Component {
                           </div>
                         </div>
                         <div className="col-lg-6">
-                          <label>City</label>
+                        {/*   <label>City</label>*/}
                           <input
                             type="text"
+                              placeholder="city"
                             name="city"
                             id="city"
                             className="form-control"
@@ -172,20 +180,22 @@ class AddCustomer extends React.Component {
                           />
                         </div>
                         <div className="col-lg-6">
-                          <label>State</label>
+                          {/* <label>State</label>*/}
                           <input
                             type="text"
                             name="state"
                             id="state"
+                              placeholder="State"
                             className="form-control"
                             value={this.state.state}
                             onChange={this.handleChange}
                           />
                         </div>
                         <div className="col-lg-6">
-                          <label>Pin</label>
+                        {/*   <label>Pin</label>*/}
                           <input
                             type="text"
+                              placeholder="Pin"
                             name="pincode"
                             id="pincode"
                             className="form-control"
@@ -193,12 +203,13 @@ class AddCustomer extends React.Component {
                             onChange={this.handleChange}
                           />
                         </div>
-                        <div className="col-lg-6">
-                          <label>Password</label>
+                        <div className="col-lg-6 pt-2">
+                        {/*   <label>Password</label>*/}
                           <input
                             type="password"
                             name="password"
                             id="password"
+                              placeholder="password"
                             className="form-control"
                             value={this.state.password}
                             onChange={this.handleChange}
@@ -214,7 +225,7 @@ class AddCustomer extends React.Component {
                        type="submit"
                         className="btn btn-block py-2"
                         style={{
-                          backgroundColor: "grey",
+                          backgroundColor:" #2A707D",
                           color: "white",
                           fontWeight: "bold",
                         }}
@@ -223,6 +234,8 @@ class AddCustomer extends React.Component {
                       </button>
                     </div>
                   </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>

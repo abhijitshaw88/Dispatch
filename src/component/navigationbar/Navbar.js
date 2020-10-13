@@ -32,7 +32,7 @@ class Navbar extends Component {
   onLogout = e => {
     e.preventDefault();
     localStorage.removeItem("tokenKey");
-    window.location.reload(); 
+    window.location.reload();
   };
   render() {
     return (
@@ -59,7 +59,7 @@ class Navbar extends Component {
         </button>
           <button
             onClick={this.showMenu}
-            className=" btn dropdown-toggle rounded "
+            className=" btn dropdown-toggle rounded ml-5"
           >
             Notification
           </button>
